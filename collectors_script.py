@@ -35,7 +35,7 @@ def tshark_runner(duration=5):
                 netint = item[0]
 
         
-        p0 = subprocess.run('tshark -i {} -w {}\\wincollectors\\data\\TSHARK\\{}_capture.pcap -a duration:{}'.format(netint, dir_win_collectors, dt_string, duration))
+        p0 = subprocess.run('tshark -i {} -w {}\\data\\TSHARK\\{}_capture.pcap -a duration:{}'.format(netint, dir_win_collectors, dt_string, duration))
         if(p0.returncode == 0):
             print("tshark complete")
         else:
@@ -43,19 +43,13 @@ def tshark_runner(duration=5):
     else:
         print("Check Wireshark Installation Directory")
 
-# Needs replacing
-# def get_eventlogs():
-#     p1 = subprocess.run('python {}\\wincollectors\\eventlogs.py'.format(dir_win_collectors))
-#     if(p1.returncode == 0):
-#         print("Logs complete")
-#     else:
-#         print("error with EventLogs")
+
 
 def eventLogs(duration=24, logType='System'):
     dt_string = now.strftime("%Y-%m-%d-%H%M")
     
     if(logType == 'System' or 'Application' or 'Security'):
-        p1 = subprocess.run("powershell.exe Get-EventLog {} -After (Get-Date).AddHours(-{}) | ConvertTo-HTML | Out-File {}\\wincollectors\\data\\EVENTLOGS\\{}_Event_Logs-{}.htm".format(logType, duration, dir_win_collectors, logType, dt_string))
+        p1 = subprocess.run("powershell.exe Get-EventLog {} -After (Get-Date).AddHours(-{}) | ConvertTo-HTML | Out-File {}\\data\\EVENTLOGS\\{}_Event_Logs-{}.htm".format(logType, duration, dir_win_collectors, logType, dt_string))
         if(p1.returncode == 0):
             print("tshark complete")
         else:
