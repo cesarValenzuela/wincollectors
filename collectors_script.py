@@ -1,6 +1,5 @@
 import subprocess
 import os
-#import win32com.shell.shell as shell
 import ctypes, sys
 from datetime import datetime
 
@@ -59,8 +58,6 @@ def eventLogs(duration=24, logType='System'):
     
 
 if is_admin():
-    
-    # p2 = subprocess.run(["C:\\Users\\User\\Desktop\\eventlogs\\procmonScript.bat"], shell=False)
     tshark_runner()
     eventLogs(24,"System")
 else:
