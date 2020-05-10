@@ -51,9 +51,9 @@ def eventLogs(duration=24, logType='System'):
     if(logType == 'System' or 'Application' or 'Security'):
         p1 = subprocess.run("powershell.exe Get-EventLog {} -After (Get-Date).AddHours(-{}) | ConvertTo-HTML | Out-File {}\\data\\EVENTLOGS\\{}_Event_Logs-{}.htm".format(logType, duration, dir_win_collectors, logType, dt_string))
         if(p1.returncode == 0):
-            print("tshark complete")
+            print("Event Logs complete")
         else:
-            print("Error with Tshark")
+            print("Error with Event Logs")
     else:
         print("Please input valid event log name (System, Application, Security")
     
@@ -62,7 +62,7 @@ if is_admin():
     
     # p2 = subprocess.run(["C:\\Users\\User\\Desktop\\eventlogs\\procmonScript.bat"], shell=False)
     tshark_runner()
-    eventLogs(6,"System")
+    eventLogs(24,"System")
 else:
     # rerun program with admin rights
     ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
